@@ -1,0 +1,8 @@
+version: '2'
+services:
+   memcached:
+        container_name: memcached
+        build:
+                context: ./build
+        image: 'eugenmayer/deb-surg-org-tests:memcached'
+        command: '/bin/bash'
