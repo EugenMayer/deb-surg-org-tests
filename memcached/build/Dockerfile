@@ -1,4 +1,5 @@
 FROM debian:jessie
+ENV DEBIAN_FRONTEND noninteractive
 
 # install packages.sury.org
 RUN apt-get update && apt-get upgrade -y \
@@ -8,10 +9,12 @@ RUN apt-get update && apt-get upgrade -y \
   && apt-key add /tmp/apt.gpg && rm /tmp/apt.gpg
 
 # install both base version
-RUN apt-get update && apt-get install -y php7.0-common php5.5-common
+RUN apt-get update && apt-get install -y php7.0-common php5.5-common php5.5-cli php7.0-cli
 
 # install memcached for php7.0 - should work - it will pick up php-memcached
 RUN apt-get install -y php7.0-memcached
 
 # install memached for php5.5 - this will fail since it wants to somehow configure against php7.0
 RUN apt-get install -y php5.5-memcached
+
+RUN apt-get install -y autoconf g++ make valgrind
